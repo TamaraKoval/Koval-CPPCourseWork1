@@ -53,6 +53,7 @@ void TSList::pushBack(TomaString str) {
 void TSList::pushAndSort(TomaString str) {
     if (!head) {
         head = new TSElem(str);
+        tail = head;
         length = 1;
     } else {
         if (isInList(str)) return;
@@ -65,6 +66,9 @@ void TSList::pushAndSort(TomaString str) {
             length++;
         } else {
             q->next = p;
+            if (p == nullptr) {
+                tail = q;
+            }
             pr->next = q;
             length++;
         }

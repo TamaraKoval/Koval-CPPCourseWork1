@@ -22,7 +22,6 @@ void TomaString::append(char ch) {
 TomaString TomaString::toLowerCase() {
     for (int i = 0; i < curMarkPos; i++) {
         tomaString[i] |= 32;
-
     }
     return *this;
 }

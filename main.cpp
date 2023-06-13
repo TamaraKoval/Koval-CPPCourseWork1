@@ -62,7 +62,7 @@ void printIntro() {
 }
 
 void getTextFromFile(TSList &list) {
-    ifstream fin("Nevsky.txt", ios::in | ios::binary);
+    ifstream fin("Twinkle.txt", ios::in | ios::binary);
     if (!fin) {
         cout << "Ошибка открытия файла";
     } else {
