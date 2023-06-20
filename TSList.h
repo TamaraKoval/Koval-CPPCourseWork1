@@ -7,12 +7,11 @@ class TSList {
 protected:
     TSElem *tail;
     TSElem *head;
-    int length;
 public:
-    TSList() { head = nullptr; tail = nullptr; length = 0;}
+    TSList() { head = nullptr; tail = nullptr; }
     ~TSList();
     void deleteFirst();
-    int getLength() const { return length; }
+    int getLength() const;
     TomaString getLine(int i) const;
     bool isInList(TomaString str);
     void pushBack(TomaString str);

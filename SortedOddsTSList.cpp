@@ -24,10 +24,9 @@ void SortedOddsTSList::fillSortedOddsList(const TSList &tsList) {
 }
 
 std::ostream &operator<<(std::ostream &stream, const SortedOddsTSList &list) {
-    TSElem *p = list.head;
-    for (int i = 0; i < list.length; i++) {
+    TSElem *p;
+    for (p = list.head; p != nullptr; p = p->next) {
         stream << *p << " : " << p->str.length() << "\n";
-        p = p->next;
     }
     return stream;
 }

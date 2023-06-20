@@ -7,14 +7,12 @@ const unsigned N = 80;
 
 class TomaString {
     static const char MARK = '@';
-    char tomaString[N + 1];
-    int curMarkPos;
+    char tomaString[N + 1]{};
     char &operator[](unsigned index);
 public:
-    TomaString() { tomaString[0] = MARK; curMarkPos = 0; }
-    TomaString(const char *str);
+    TomaString() { tomaString[0] = MARK; }
     static int getMaxLength() { return N; }
-    int length();
+    int length() const;
     void append(char ch);
     TomaString toLowerCase();
     bool isOdd();
@@ -24,7 +22,6 @@ public:
     TomaString & operator=(TomaString str);
     bool operator==(TomaString str);
     bool operator>(TomaString str);
-    bool operator>=(TomaString str);
     friend std::ostream &operator<<(std::ostream &stream, const TomaString &str);
 };
 

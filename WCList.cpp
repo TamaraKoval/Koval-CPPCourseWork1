@@ -6,11 +6,9 @@ void WCList::push_back(TomaString word) {
     if (!head) {
         head = new WordCounter(word);
         tail = head;
-        length = 1;
     } else {
         tail->next = new WordCounter(word);
         tail = tail->next;
-        length++;
     }
 }
 
@@ -18,13 +16,12 @@ void WCList::deleteFirst() {
     if (head != nullptr) {
         WordCounter *temp = head;
         head = head->next;
-        length--;
         delete temp;
     }
 }
 
 WCList::~WCList() {
-    for (int i = 0; i < length; i++) {
+    while (head != nullptr) {
         deleteFirst();
     }
 }
@@ -64,10 +61,9 @@ void WCList::fillFromTSList(const TSList &tsList) {
 }
 
 std::ostream &operator<<(std::ostream &stream, const WCList &list) {
-    WordCounter *p = list.head;
-    for (int i = 0; i < list.length; i++) {
+    WordCounter *p;
+    for (p = list.head; p != nullptr; p = p->next) {
         stream << *p << "\n";
-        p = p->next;
     }
     return stream;
 }

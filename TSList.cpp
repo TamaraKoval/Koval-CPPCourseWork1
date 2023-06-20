@@ -1,22 +1,31 @@
 #include "TSList.h"
 
+int TSList::getLength() const {
+    if (head) {
+        TSElem *p;
+        int i;
+        for (i = 0, p = head; p!= nullptr; p=p->next, i++);
+        return i;
+    }
+    return 0;
+}
+
 void TSList::deleteFirst() {
     if (head != nullptr) {
         TSElem *temp = head;
         head = head->next;
-        length--;
         delete temp;
     }
 }
 
 TSList::~TSList() {
-    for (int i = 0; i < length; i++) {
+    while (head != nullptr) {
         deleteFirst();
     }
 }
 
 TomaString TSList::getLine(int index) const {
-    if (index >= length) {
+    if (index >= this->getLength()) {
         throw std::out_of_range("there is no line for given index. Bye!");
     }
     TSElem *p;
@@ -30,7 +39,7 @@ TomaString TSList::getLine(int index) const {
 
 bool TSList::isInList(TomaString str) {
     TSElem *p;
-    for (p = head; p != nullptr; p = p->next) {
+    for (p = head;  p != nullptr; p = p->next) {
         if (p->str == str) {
             return true;
         }
@@ -42,11 +51,9 @@ void TSList::pushBack(TomaString str) {
     if (!head) {
         head = new TSElem(str);
         tail = head;
-        length = 1;
     } else {
         tail->next = new TSElem(str);
         tail = tail->next;
-        length++;
     }
 }
 
@@ -54,32 +61,28 @@ void TSList::pushAndSort(TomaString str) {
     if (!head) {
         head = new TSElem(str);
         tail = head;
-        length = 1;
     } else {
         if (isInList(str)) return;
         TSElem *q, *pr, *p;
         q = new TSElem(str);
         for (p = head, pr = nullptr; p != nullptr && (str > p->str); pr = p, p = p->next);
-        if (pr == nullptr) {
+        if (!pr) {
             q->next = head;
             head = q;
-            length++;
         } else {
             q->next = p;
-            if (p == nullptr) {
+            if (!p) {
                 tail = q;
             }
             pr->next = q;
-            length++;
         }
     }
 }
 
 std::ostream &operator<<(std::ostream &stream, const TSList &list) {
-    TSElem *p = list.head;
-    for (int i = 0; i < list.length; i++) {
+    TSElem *p;
+    for (p = list.head; p != nullptr; p = p->next) {
         stream << *p << "\n";
-        p = p->next;
     }
     return stream;
 }

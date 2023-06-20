@@ -7,10 +7,9 @@
 class WCList {
     WordCounter *head;
     WordCounter *tail;
-    int length;
     void push_back(TomaString word);
 public:
-    WCList() { head = nullptr; tail = nullptr; length = 0;}
+    WCList() { head = nullptr; tail = nullptr; }
     ~WCList();
     void deleteFirst();
     void addCounter(TomaString word);
